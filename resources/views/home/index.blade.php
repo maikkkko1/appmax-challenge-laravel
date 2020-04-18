@@ -23,7 +23,6 @@
                         <th scope="col">Descrição</th>
                         <th scope="col">Quantidade</th>
                         <th scope="col">Preço</th>
-                        <th scope="col">Via API</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -45,13 +44,6 @@
 
                             <td>{{$product['quantity']}}</td>
                             <td>{{$product['price']}}</td>
-                            <td>
-                                @if ($product['use_api'])
-                                    <span class="badge badge-pill badge-success">Sim</span>
-                                @else
-                                    <span class="badge badge-pill badge-danger">Não</span>
-                                @endif
-                            </td>
                             <td>
                                 <i title="Editar produto" class="fa fa-pencil-square-o cursor-pointer" data-product="{{$product}}"
                                 data-toggle="modal" data-target="#editProductModal"></i>

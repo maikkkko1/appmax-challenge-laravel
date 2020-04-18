@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity');
             $table->string('price');
             $table->boolean('use_api')->default(false);
+            $table->softDeletes();
         });
     }
 

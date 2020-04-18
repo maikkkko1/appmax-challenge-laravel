@@ -36,8 +36,8 @@
                     <a class="nav-link" href="/home">Home</a>
                   </li>
 
-                  <li class="nav-item {{(Request::is('/clients') ? 'active' : null)}}">
-                    <a class="nav-link" href="/clients">Relatório</a>
+                  <li class="nav-item {{(Request::is('/report') ? 'active' : null)}}">
+                    <a class="nav-link" href="/product/report">Relatório</a>
                   </li>
                 </ul>
             </div>

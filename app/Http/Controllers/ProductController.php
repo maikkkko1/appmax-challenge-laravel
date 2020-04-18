@@ -19,7 +19,25 @@ class ProductController extends Controller {
 
         $this->productService->create($request->all());
 
+        if ($request->use_api) {
+            return response()->json([
+                'error' => false,
+                'result' => true
+            ], 201);
+        }
+
         return redirect('/home')->with('alert-success', 'Produto cadastrado com sucesso!');
+    }
+
+    public function createApi(Request $request) {
+        $request['use_api'] = true;
+
+        $this->productService->create($request->all());
+
+        return response()->json([
+            'error' => false,
+            'result' => true
+        ], 201);
     }
 
     public function getAll() {
@@ -38,6 +56,23 @@ class ProductController extends Controller {
         }
 
         return redirect('/home')->with('alert-success', 'Produto alterado com sucesso!');
+    }
+
+    public function deleteApi($id) {
+        $delete = $this->productService->delete($id, true);
+
+        if (!$delete) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Falha ao remover produto!',
+                'result' => false
+            ], 500);
+        }
+
+        return response()->json([
+            'error' => false,
+            'result' => true
+        ], 200);
     }
 
     public function delete($id) {
@@ -62,5 +97,11 @@ class ProductController extends Controller {
         }
 
         return redirect('/home')->with('alert-success', 'Produto baixado com sucesso!');
+    }
+
+    public function getReport(Request $request) {
+        $report = $this->productService->getReport($request->day);
+
+        return view('report.index')->with('report', $report);
     }
 }

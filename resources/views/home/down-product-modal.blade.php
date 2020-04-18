@@ -32,7 +32,7 @@
     </div>
 </div>
 <script>
-    function downProduct(ref) {
+    function downProduct() {
         const form = $('#downForm');
 
         const availableQuantity = $('#qtd').val();
@@ -40,8 +40,6 @@
 
         if (Number(quantity) > Number(availableQuantity)) {
             return $('#quantity-error').css("visibility", "visible");
-        } else {
-            $('#quantity-error').css("visibility", "hidden");
         }
 
         form.submit();

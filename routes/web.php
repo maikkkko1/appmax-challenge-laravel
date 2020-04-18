@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::put('/{id}', 'ProductController@update');
         Route::delete('/{id}', 'ProductController@delete');
         Route::post('down/{id}', 'ProductController@downProduct');
+        Route::get('/report', 'ProductController@getReport');
     });
 
     Route::get('/logout', 'AuthController@logout');
