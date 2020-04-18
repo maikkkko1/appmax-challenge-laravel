@@ -85,11 +85,31 @@ Também caso o produto esteja com o estoque abaixo de 100, é exibido um badge d
 ### API
 Como requisitado, também foram desenvolvidos 2 endpoints para utilização via API.
 
+Como é necessário login no sistema para utilizar, via API é necessário autenticação, que foi implementada utilizando o Passport.
+
+Para utilizar os endpoints de adição e remoção de produtos, é necessário estar autenticado pelo endpoint abaixo:
+```
+POST /api/auth
+
+REQUEST BODY 
+{
+	"user": "maikon",
+	"password": "123"
+}
+```
+
+Caso as credenciais estejam corretas, sera retornado o access_token, que deve ser passado no header das requisições da seguinte forma:
+```
+Authorization: Bearer {access_token}
+```
+
 Adicionar produto
 ```
 POST /api/product
 
 REQUEST BODY 
+headers: Authorization: Bearer {access_token}
+
 {
 	"sku": "123",
 	"title": "Test",
@@ -101,5 +121,7 @@ REQUEST BODY
 
 Remover produto
 ```
+headers: Authorization: Bearer {access_token}
+
 DELETE /api/product/{id}
 ```
