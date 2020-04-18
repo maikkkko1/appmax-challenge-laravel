@@ -1,79 +1,105 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+### Sistema de controle de estoque - Appmax
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Seguindo as seguintes regras foi desenvolvido um sistema simples de controle de estoque.
 
-## About Laravel
+O desafio consiste em desenvolver um sistema em laravel que possibilite gerenciar um estoque, com os seguintes requisitos: 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Um CRUD para os produtos com SKU para identificação.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Uma tela para adicionar produtos ao estoque.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Uma tela para dar baixa em produtos que serão enviados aos clientes.
 
-## Learning Laravel
+O sistema deverá possuir uma API, disponível para fazer as movimentações do estoque com 2 endpoints:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* /api/baixar-produtos 
+* /api/adicionar-produtos 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Um relatório de produtos movimentados por dia com: 
 
-## Laravel Sponsors
+Quantos e quais produtos foram adicionados ao estoque.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Quantos e quais produtos foram removidos do estoque.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+Se a adição/remoção foi feita via sistema ou via API.
 
-## Contributing
+Aviso de estoque baixo quando um produto possuir menos de 100 unidades no estoque. 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+O sistema deverá estar protegido por um sistema de login.
 
-## Code of Conduct
+Algumas validações precisam ser feitas tanto no sistema quanto pela API: 
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Validação de quantidade de produtos: 
 
-## Security Vulnerabilities
+Não poderá remover produtos caso não possua a quantidade desejada. 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Não poderão ser cadastrados produtos com SKU duplicados (código para o produto). 
 
-## License
+### Tecnologias
+* PHP 7.4.4
+* MySQL 10.4.11
+* Laravel 7
+* Bootstrap 4
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Utilização
+
+No diretório raiz do projeto, copie o arquivo .env.example e renomeie para apenas .env, dentro dele realize as configurações do seu banco de dados local, como o nome do banco, usuário, senha etc... o fluxo normal do Laravel.
+
+Após isso, rode o composer para instalar as dependências.
+```
+composer install
+```
+
+Certifique-se de que você tem a base de dados que configurou no arquivo .env criada e então rode o comando de migrations:
+```
+php artisan migrate
+```
+
+Após isso o banco de dados deve estar populado com todas as tabelas do sistema.
+
+Agora basta gerar a chave da aplicação e iniciar o servidor em desenvolvimento e utilizar o sistema:
+```
+php artisan key:generate
+php artisan serve
+```
+
+Foram escritos poucos testes apenas exemplares, para rodar:
+```
+php artisan test
+```
+
+Agora ao acessar http://127.0.0.1:8000 deve exibir a tela inicial de login do sistema.
+
+Como o sistema é protegido por login, deve-se então realizar o cadastro de usuário antes de continuar, clicando em **Cadastrar-se**.
+
+Após cadastrar-se e realizar o login, será apresentada a tela de listagem de produtos, inicialmente não existirá nenhum produto, portanto deve-se adicionar algum clicando no botão **Adicionar produto**.
+
+Após adicionar o produto, o mesmo será apresentado na listagem junto de suas informações, também estarão disponíveis algumas ações sobre esse produto, como edição, baixa e remoção.
+
+No menu superior, ao clicar em **Relatório**, será levado para a tela onde é possivel visualizar os produtos adicionados/removidos do dia atual ou filtrar para algum outro dia. 
+
+Também é exibido se a ação sobre o produto foi realizada via API ou sistema, junto de dois totalizadores de produtos adicionados e removidos. 
+
+Também caso o produto esteja com o estoque abaixo de 100, é exibido um badge de estoque baixo.
+
+### API
+Como requisitado, também foram desenvolvidos 2 endpoints para utilização via API.
+
+Adicionar produto
+```
+POST /api/product
+
+REQUEST BODY 
+{
+	"sku": "123",
+	"title": "Test",
+	"description": "Test description",
+	"quantity": 5,
+	"price": "15.00"
+}
+```
+
+Remover produto
+```
+DELETE /api/product/{id}
+```
