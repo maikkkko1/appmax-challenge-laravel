@@ -2,7 +2,6 @@
 namespace App\Services;
 
 use App\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductService {
     public function create($data) {
